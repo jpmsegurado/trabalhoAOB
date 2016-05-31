@@ -64,4 +64,12 @@ public class ArvoreBinaria {
         System.out.println("===============");
         imprimeArvore(nodo.getDireita());
     }
+
+    public ItemArvore maiorMenores(ItemArvore nodo){
+        ItemArvore aux = nodo;
+        while(aux.getDireita() != null){
+            aux = aux.getDireita();
+        }
+        return aux;
+    }
 }
