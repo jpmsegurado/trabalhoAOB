@@ -39,4 +39,29 @@ public class ArvoreBinaria {
             }
         }
     }
+
+    public void imprimeArvoreG(ItemArvore nodo, int cont, int inicio, int fim){
+        imprimeArvoreG(nodo.getEsquerda(), cont, inicio, fim);
+        if(cont < inicio){
+            cont ++;
+        }else if (cont <= fim){
+            System.out.println("===============");
+            System.out.printf("|CHAVE: %5d |\n", nodo.getChave());
+            System.out.printf("|DADO:  %5s |\n", nodo.getDado());
+            System.out.println("===============");
+            cont ++;
+        }else{
+            return;
+        }
+        imprimeArvoreG(nodo.getDireita(), cont, inicio, fim);
+    }
+
+    public void imprimeArvore(ItemArvore nodo){
+        imprimeArvore(nodo.getEsquerda());
+        System.out.println("===============");
+        System.out.printf("|CHAVE: %5d |\n", nodo.getChave());
+        System.out.printf("|DADO:  %5s |\n", nodo.getDado());
+        System.out.println("===============");
+        imprimeArvore(nodo.getDireita());
+    }
 }
