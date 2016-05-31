@@ -21,6 +21,12 @@ void LeituraIncersao(Elemento *E){
 	printf("Entre com o dado: ");
 	scanf("%s", E->dado);
 }
+
+int LeituraPesquisa(int *k){
+	printf("Entre com a chave primária do elemento a ser pesquisado: \n\t-");
+	scanf("%d", k);
+}
+
 //Estruturas relacionadas à Lista Encadeada
 
 
@@ -61,6 +67,43 @@ void addList(LinkedList *L, Elemento E){
     L->tamanho++;
 }
 
+void pesquisaLista(LinkedList L, int chave){
+	Elemento elem;
+	Ponteiro P = L.inicio;
+	while (P->proximo != L.fim && P->elem.chave != chave){
+		P = P->proximo;
+	}
+	if(P->elem.chave == chave){
+		ExibeDado(P->elem);
+	}else{
+		printf("Elemento inexistente...\n");
+		return;
+	}
+}
+
+void removeElemLista(LinkedList *L, int chave){
+	int i;
+	Ponteiro P = L->inicio, A;
+	while (P->proximo != L->fim && P->elem.chave != chave){
+		A = P;
+		P = P->proximo;
+	}
+	if(P->elem.chave == chave){
+		exibeDados(P->elem);
+		printf("Confirmar Remoção?\n\t1. Sim;\n\t2. Não.\n\t-");
+		scanf("%d", &i);
+		if(i == 1){
+			A->proximo = P->proximo;
+			free(P);
+		}else{
+			printf("Operação Cancelada...\n");
+			return;
+		}
+	}else{
+		printf("Elemento inexistente\n");
+		return;
+	}
+}
 //Estruturas relacionadas à Arvore Binária
 
 typedef struct nd{
