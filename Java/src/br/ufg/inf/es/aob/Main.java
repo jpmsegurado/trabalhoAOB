@@ -11,15 +11,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ListaEncadeada lista = new ListaEncadeada(10);
-        lista.addItemFinal("bla", 1);
-        lista.addItemFinal("bla", 2);
-        lista.addItemInicio("bla", 3);
-        lista.addItemInicio("bla", 4);
-        System.out.println(lista.imprimeLista());
-        lista.removeItem(1);
-        System.out.println(lista.imprimeLista());
+        ArvoreBinaria tree = new ArvoreBinaria(10);
+        tree.addItem(tree.getRaiz(), 15, "ok");
+        tree.addItem(tree.getRaiz(), 25, "ok");
+        tree.addItem(tree.getRaiz(), 11, "ok");
+        tree.addItem(tree.getRaiz(), 13, "ok");
+        tree.addItem(tree.getRaiz(), 19, "ok");
 
+        tree.imprimeArvore(tree.getRaiz());
     }
 
 }

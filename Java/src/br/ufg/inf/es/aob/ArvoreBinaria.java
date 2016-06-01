@@ -14,7 +14,29 @@ public class ArvoreBinaria {
         this.maximo = max;
     }
 
+    public ItemArvore getRaiz(){
+        return this.raiz;
+    }
+
+    public int getTamanho(){
+        return this.tamanho;
+    }
+
+    public int getMaximo(){
+        return this.maximo;
+    }
+
+    public void setMaximo(int max){
+        if(max > this.getTamanho()){
+            this.maximo = max;
+        }
+    }
+
     public void addItem(ItemArvore nodo, int chave, String dado) {
+        if (this.getTamanho() == this.getMaximo()){
+            System.out.println("Tamanho máximo atingido!");
+            return;
+        }
         ItemArvore novo = new ItemArvore(dado, chave);
         novo.setDireita(null);
         novo.setEsquerda(null);
@@ -41,35 +63,32 @@ public class ArvoreBinaria {
     }
 
     public void imprimeArvoreG(ItemArvore nodo, int cont, int inicio, int fim){
-        imprimeArvoreG(nodo.getEsquerda(), cont, inicio, fim);
-        if(cont < inicio){
-            cont ++;
-        }else if (cont <= fim){
-            System.out.println("===============");
-            System.out.printf("|CHAVE: %5d |\n", nodo.getChave());
-            System.out.printf("|DADO:  %5s |\n", nodo.getDado());
-            System.out.println("===============");
-            cont ++;
-        }else{
-            return;
+        if (nodo != null){
+            imprimeArvoreG(nodo.getEsquerda(), cont, inicio, fim);
+            if(cont < inicio){
+                cont ++;
+            }else if (cont <= fim){
+                System.out.printf("chave--> %5d |\n", nodo.getChave());
+                System.out.printf("dado---> %5s |\n", nodo.getDado());
+                System.out.println();
+                cont ++;
+            }else{
+                return;
+            }
+            imprimeArvoreG(nodo.getDireita(), cont, inicio, fim);
         }
-        imprimeArvoreG(nodo.getDireita(), cont, inicio, fim);
+
     }
 
     public void imprimeArvore(ItemArvore nodo){
-        imprimeArvore(nodo.getEsquerda());
-        System.out.println("===============");
-        System.out.printf("|CHAVE: %5d |\n", nodo.getChave());
-        System.out.printf("|DADO:  %5s |\n", nodo.getDado());
-        System.out.println("===============");
-        imprimeArvore(nodo.getDireita());
-    }
 
-    public ItemArvore maiorMenores(ItemArvore nodo){
-        ItemArvore aux = nodo;
-        while(aux.getDireita() != null){
-            aux = aux.getDireita();
+        if(nodo != null) {
+            imprimeArvore(nodo.getEsquerda());
+            System.out.printf("chave--> %5d \n", nodo.getChave());
+            System.out.printf("dado---> %5s \n", nodo.getDado());
+            System.out.println();
+            imprimeArvore(nodo.getDireita());
         }
-        return aux;
+
     }
 }
