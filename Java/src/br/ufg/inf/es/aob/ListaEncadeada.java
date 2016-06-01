@@ -24,6 +24,10 @@ public class ListaEncadeada {
         return ("Modificado.");
     }
 
+    public int getMaximo(){
+        return this.maximo;
+    }
+
     public void addItemInicio(String dado,int chave){
         ItemLista novo = new ItemLista(dado, chave);
         novo.setProximo(this.primeiro);

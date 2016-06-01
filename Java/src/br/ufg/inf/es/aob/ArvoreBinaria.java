@@ -1,11 +1,14 @@
 package br.ufg.inf.es.aob;
 
+import java.math.*;
+
 /**
  * Created by Dhiogo on 31-May-16.
  */
 public class ArvoreBinaria {
 
-    private int tamanho, maximo;
+    private double tamanho;
+    private double maximo;
     private ItemArvore raiz;
 
     ArvoreBinaria(int max){
@@ -18,17 +21,18 @@ public class ArvoreBinaria {
         return this.raiz;
     }
 
-    public int getTamanho(){
+    public double getTamanho(){
         return this.tamanho;
     }
 
-    public int getMaximo(){
+    public double getMaximo(){
         return this.maximo;
     }
 
     public void setMaximo(int max){
-        if(max > this.getTamanho()){
-            this.maximo = max;
+        double newMax = Math.pow(10, max);
+        if(newMax > this.getTamanho()){
+            this.maximo = newMax;
         }
     }
 
@@ -90,5 +94,21 @@ public class ArvoreBinaria {
             imprimeArvore(nodo.getDireita());
         }
 
+    }
+
+    public String buscaElemento(ItemArvore nodo, int chave){
+        StringBuilder builder = new StringBuilder();
+        if (nodo == null){
+            return "Elemento inexistente!";
+        }
+        if(nodo.getChave() < chave){
+            return buscaElemento(nodo.getDireita(), chave);
+        }else if(nodo.getChave() > chave){
+            return buscaElemento(nodo.getEsquerda(), chave);
+        }else{
+            builder.append("Chave --> "+ nodo.getChave() +"\n");
+            builder.append("Dado ---> "+ nodo.getDado() +"\n");
+            return builder.toString();
+        }
     }
 }
