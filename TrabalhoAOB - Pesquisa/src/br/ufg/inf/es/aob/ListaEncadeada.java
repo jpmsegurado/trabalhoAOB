@@ -9,18 +9,28 @@ public class ListaEncadeada {
     private ItemLista primeiro,ultimo;
 
     ListaEncadeada(int max){
+        if(max != 10 && max != 100 && max != 1000 && max != 10000 && max != 100000 && max != 1000000){
+            if (max < 100){
+                max = 100;
+                System.out.println("Tamanho máximo invalido, modificado para 100...");
+            }else{
+                max = 1000;
+                System.out.println("Tamanho máximo inválido, modificado para 1000...");
+            }
+        }
         this.maximo = max;
         this.tamanho = 0;
         this.primeiro = null;
         this.ultimo = null;
     }
 
-    public String setMaximo(int maximo){
-        if(maximo < getTamanho()){
+    public String setMaximo(int max){
+        if(max < getTamanho()){
             return ("Novo tamanho menor que a quantidade de itens atual da lista!");
+        }else if(max != 10 && max != 100 && max != 1000 && max != 10000 && max != 100000 && max != 1000000){
+            return "O tamanho deve ser uma potencia de dez (1-6)";
         }
-
-        this.maximo = maximo;
+        this.maximo = max;
         return ("Modificado.");
     }
 
@@ -37,7 +47,7 @@ public class ListaEncadeada {
         ItemLista novo = new ItemLista(dado, chave);
         ItemLista aux = this.primeiro;
         if(this.primeiro == null){
-            // se n�o existe um primeiro, cria o primeiro
+            // se n�o existe um primeiro, cria o primeiro
             this.primeiro = novo;
             this.ultimo = this.primeiro;
         }else{
@@ -46,6 +56,7 @@ public class ListaEncadeada {
             // e faz com que seja o ultimo da lista
             this.ultimo.setProximo(novo);
             this.ultimo = novo;
+
         }
 
         this.tamanho++;
@@ -113,7 +124,7 @@ public class ListaEncadeada {
         ItemLista aux = this.primeiro;
         StringBuilder builder = new StringBuilder();
         if(inicio > this.getTamanho() || fim < inicio || inicio < 0 || fim - inicio > 100 ){
-            return "�ndices Inv�lidos!";
+            return "�ndices Inválidos!";
         }
         for (int i = 0; i <= fim; i++){
             if(i >= inicio){

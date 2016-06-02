@@ -19,6 +19,15 @@ public class ArvoreBinaria {
         this.cont = 0;
         this.raiz = null;
         this.tamanho = 0;
+        if(max != 10 && max != 100 && max != 1000 && max != 10000 && max != 100000 && max != 1000000){
+            if (max < 100){
+                max = 100;
+                System.out.println("Tamanho m√°ximo invalido, modificado para 100...");
+            }else{
+                max = 1000;
+                System.out.println("Tamanho m√°ximo inv√°lido, modificado para 1000...");
+            }
+        }
         this.maximo = max;
     }
 
@@ -47,8 +56,8 @@ public class ArvoreBinaria {
     }
 
     public void setMaximo(int max){
-        if(max != 10 || max != 100 || max != 1000 || max != 10000 || max != 100000 || max != 1000000){
-            System.out.println("Entrada Inv·lida, o tamanho deve ser uma potÍncia de dez!");
+        if(max != 10 && max != 100 && max != 1000 && max != 10000 && max != 100000 && max != 1000000){
+            System.out.println("Entrada Inv√°lida, o tamanho deve ser uma pot√™ncia de dez!");
             return;
         }
         if(max > this.getTamanho()){
@@ -58,7 +67,7 @@ public class ArvoreBinaria {
 
     public void addItem(ItemArvore nodo, int chave, String dado) {
         if (this.getTamanho() == this.getMaximo()){
-            System.out.println("Tamanho m·ximo atingido!");
+            System.out.println("Tamanho m√°ximo atingido!");
             return;
         }
         ItemArvore novo = new ItemArvore(dado, chave);
@@ -94,7 +103,7 @@ public class ArvoreBinaria {
             }else if (tree.getCont() <= fim){
                 System.out.printf("chave--> %5d |\n", nodo.getChave());
                 System.out.printf("dado---> %5s |\n", nodo.getDado());
-                System.out.println(cont);
+                System.out.println();
                 tree.addCont();
             }else{
                 return;
@@ -147,7 +156,7 @@ public class ArvoreBinaria {
 
     public ItemArvore removeElemento (ItemArvore nodo, ItemArvore pai, int valor, char teste){
         if (nodo == null){
-            System.out.println("A arvore est· vazia ");
+            System.out.println("A arvore est√° vazia ");
         }
         if (valor < nodo.getChave()) {
             removeElemento (nodo.getEsquerda(), nodo, valor, 'e');
@@ -160,7 +169,7 @@ public class ArvoreBinaria {
             }else if (teste == 'e'){
                 pai.setEsquerda(null);
             }
-            System.out.println("O nÛ foi removido " + nodo.getChave());
+            System.out.println("O n√≥ foi removido " + nodo.getChave());
         } else if (nodo.getEsquerda() != null) {
             ItemArvore aux = maiorMenores(nodo.getEsquerda());
             aux.setDireita(nodo.getDireita());

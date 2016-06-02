@@ -16,6 +16,8 @@ public class Main {
         System.out.println("  2 - Pesquisa Elemento;");
         System.out.println("  3 - Remove Elemento;");
         System.out.println("  4 - Modificar Tamanho;");
+        System.out.println("  5 - Insere Elemento;");
+        System.out.println("  6 - Completar Tabela;");
         System.out.println("  0 - Sair.");
         System.out.print("  - ");
         return Integer.parseInt(input.nextLine());
@@ -29,6 +31,7 @@ public class Main {
         System.out.println("  4 - Modificar Tamanho;");
         System.out.println("  5 - Ordena Crescente;");
         System.out.println("  6 - Ordena Decrescente;");
+        System.out.println("  7 - Insere Elemento;");
         System.out.println("  0 - Sair.");
         System.out.print("  - ");
         return Integer.parseInt(input.nextLine());
@@ -50,7 +53,7 @@ public class Main {
         }else{
             do{
                 System.out.println("Deseja entrar com os elementos manualmente?");
-                System.out.println("\t1. Sim;\n\t2. Não.");
+                System.out.println("\t1. Sim;\n\t2. NÃ£o.");
                 System.out.print("-");
                 resposta = Integer.parseInt(input.nextLine());
                 if(resposta == 1){
@@ -65,7 +68,7 @@ public class Main {
                             tree.addItem(tree.getRaiz(), chave, dado);
                         }
                     }else{
-                        System.out.println("Quantidade de elementos maior que o máximo permitido");
+                        System.out.println("Quantidade de elementos maior que o mÃ¡ximo permitido");
                         resposta = 3;
                     }
                 }else if (resposta == 2){
@@ -93,7 +96,7 @@ public class Main {
         }else{
             do{
                 System.out.println("Deseja entrar com os elementos manualmente?");
-                System.out.println("\t1. Sim;\n\t2. Não.");
+                System.out.println("\t1. Sim;\n\t2. NÃ£o.");
                 System.out.print("-");
                 resposta = Integer.parseInt(input.nextLine());
                 if(resposta == 1){
@@ -108,7 +111,7 @@ public class Main {
                             lista.addItemFinal(dado, chave);
                         }
                     }else{
-                        System.out.println("Quantidade de elementos maior que o máximo permitido");
+                        System.out.println("Quantidade de elementos maior que o mÃ¡ximo permitido");
                         resposta = 3;
                     }
 
@@ -124,8 +127,10 @@ public class Main {
     }
 
     public static void arvore(int max){
+        Scanner input = new Scanner(System.in);
         int op;
         int in, fim, key;
+        String dado;
         ArvoreBinaria tree = new ArvoreBinaria(max);
         carregaArvore(tree);
         do{
@@ -147,13 +152,13 @@ public class Main {
                     }
                     break;
                 case 2:
-                    System.out.println("Entre com a chave primária da pesquisa:");
+                    System.out.println("Entre com a chave primÃ¡ria da pesquisa:");
                     System.out.print("  - ");
                     key = Integer.parseInt(input.nextLine());
                     tree.buscaElemento(tree.getRaiz(), key);
                     break;
                 case 3:
-                    System.out.println("Entre com a chave primária da remoção:");
+                    System.out.println("Entre com a chave primÃ¡ria da remoÃ§Ã£o:");
                     System.out.print("  - ");
                     key = Integer.parseInt(input.nextLine());
                     tree.removeElemento(tree.getRaiz(), null, key, ' ');
@@ -164,19 +169,32 @@ public class Main {
                     key = Integer.parseInt(input.nextLine());
                     tree.setMaximo(key);
                     break;
+                case 5:
+                    System.out.print("Chave = ");
+                    key = Integer.parseInt(input.nextLine());
+                    System.out.print("Dado = ");
+                    dado = input.nextLine();
+                    tree.addItem(tree.getRaiz(), key, dado);
+                    break;
+                case 6:
+                    for(double i = tree.getTamanho(); i < tree.getMaximo(); i++){
+                        Item item = new Item ((int)tree.getMaximo());
+                        tree.addItem(tree.getRaiz(), item.getChave(), item.getDado());
+                    }
                 case 0:
                     System.out.println("Obrigado por usar nosso sistema!");
                     break;
                 default:
-                    System.out.println("Entrada inválida!!");
+                    System.out.println("Entrada invÃ¡lida!!");
             }
-            System.out.println("Tempo da execução: "+ (System.currentTimeMillis() - inicio) * 0.001 +" segundos;");
+            System.out.println("Tempo da execuÃ§Ã£o: "+ (System.currentTimeMillis() - inicio) * 0.001 +" segundos;");
         }while (op != 0);
     }
 
     public static void lista(int max){
         int op;
         int in, fim, key;
+        String dado;
         ListaEncadeada lista = new ListaEncadeada(max);
         carregaLista(lista);
         do{
@@ -197,13 +215,13 @@ public class Main {
                     }
                     break;
                 case 2:
-                    System.out.println("Entre com a chave primária da pesquisa:");
+                    System.out.println("Entre com a chave primÃ¡ria da pesquisa:");
                     System.out.print("  - ");
                     key = Integer.parseInt(input.nextLine());
                     System.out.println(lista.pesquisa(key));
                     break;
                 case 3:
-                    System.out.println("Entre com a chave primária da remoção:");
+                    System.out.println("Entre com a chave primÃ¡ria da remoÃ§Ã£o:");
                     System.out.print("  - ");
                     key = Integer.parseInt(input.nextLine());
                     lista.removeItem(key);
@@ -222,13 +240,19 @@ public class Main {
                     lista.ordenaListaDecrescente();
                     System.out.println("Tabela Ordenada...");
                     break;
+                case 7:
+                    System.out.print("Chave = ");
+                    key = Integer.parseInt(input.nextLine());
+                    System.out.print("Dado = ");
+                    dado = input.nextLine();
+                    lista.addItemFinal(dado, key);
                 case 0:
                     System.out.println("Obrigado por usar nosso sistema!");
                     break;
                 default:
-                    System.out.println("Entrada Inválida!");
+                    System.out.println("Entrada InvÃ¡lida!");
             }
-            System.out.println("Tempo da execução: "+ (System.currentTimeMillis() - inicio)*0.001 +" segundos");
+            System.out.println("Tempo da execuÃ§Ã£o: "+ (System.currentTimeMillis() - inicio)*0.001 +" segundos");
         }while (op != 0);
     }
 
@@ -236,7 +260,7 @@ public class Main {
         int op;
         int max;
         System.out.println("Bem vindo!");
-        System.out.println("Que tipo de estrutura deseja utilizar?\n\t1. Lista Encadeada;\n\t2. Arvore Binária de Busca.");
+        System.out.println("Que tipo de estrutura deseja utilizar?\n\t1. Lista Encadeada;\n\t2. Arvore BinÃ¡ria de Busca.");
         System.out.print("\t - ");
         op = Integer.parseInt(input.nextLine());
         System.out.println("Entre com o tamanho da tabela:");
