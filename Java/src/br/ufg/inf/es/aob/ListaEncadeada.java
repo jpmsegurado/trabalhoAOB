@@ -97,6 +97,23 @@ public class ListaEncadeada {
         return builder.toString();
     }
 
+    public String imprimeIntervalo(int inicio, int fim){
+        ItemLista aux = this.primeiro;
+        StringBuilder builder = new StringBuilder();
+        if(inicio > this.getTamanho() || fim < inicio || inicio < 0 || fim - inicio > 100 ){
+            return "Índices Inválidos!";
+        }
+        for (int i = 0; i <= fim; i++){
+            if(i >= inicio){
+                builder.append("chave --> "+ aux.getChave()+"\n");
+                builder.append("dado ---> "+ aux.getDado()+"\n");
+                builder.append("======================\n");
+            }
+            aux = aux.getProximo();
+        }
+        return builder.toString();
+    }
+
     public void ordenaListaCrescente(){
         ItemLista aux1 = this.primeiro;
         while(aux1 != null){

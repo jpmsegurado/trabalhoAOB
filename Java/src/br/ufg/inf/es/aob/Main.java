@@ -21,6 +21,19 @@ public class Main {
         return Integer.parseInt(input.nextLine());
     }
 
+    public static int menuLista(){
+        System.out.println("==============================");
+        System.out.println("  1 - Lista Elementos;");
+        System.out.println("  2 - Pesquisa Elemento;");
+        System.out.println("  3 - Remove Elemento;");
+        System.out.println("  4 - Modificar Tamanho;");
+        System.out.println("  5 - Ordena Crescente;");
+        System.out.println("  6 - Ordena Decrescente;");
+        System.out.println("  0 - Sair.");
+        System.out.print("  - ");
+        return Integer.parseInt(input.nextLine());
+    }
+
     public static void carregaArvore(ArvoreBinaria tree){
         int resposta;
         int qtd;
@@ -125,20 +138,87 @@ public class Main {
                     System.out.println("Entre com o novo tamanho da tabela:");
                     System.out.print("  - ");
                     key = Integer.parseInt(input.nextLine());
-                    if ();
+                    tree.setMaximo(key);
+                    break;
+                case 0:
+                    System.out.println("Obrigado por usar nosso sistema!");
+                    break;
+                default:
+                    System.out.println("Entrada inválida!!");
+            }
+        }while (op != 0);
+    }
+
+    public static void lista(int max){
+        int op;
+        int in, fim, key;
+        ListaEncadeada lista = new ListaEncadeada(max);
+        carregaLista(lista);
+        do{
+            switch (op = menuLista()) {
+                case 1:
+                    if(lista.getTamanho() < 100){
+                        System.out.println(lista.imprimeLista());
+                    }else{
+                        System.out.println("Entre com o intervalo de listagem:");
+                        System.out.print("Inicia: ");
+                        in = Integer.parseInt(input.nextLine());
+                        System.out.print("Termina: ");
+                        fim = Integer.parseInt(input.nextLine());
+                        System.out.println(lista.imprimeIntervalo(in, fim));
+                    }
+                    break;
+                case 2:
+                    System.out.println("Entre com a chave primária da pesquisa:");
+                    System.out.print("  - ");
+                    key = Integer.parseInt(input.nextLine());
+                    lista.getItemLista(key);
+                    break;
+                case 3:
+                    System.out.println("Entre com a chave primária da remoção:");
+                    System.out.print("  - ");
+                    key = Integer.parseInt(input.nextLine());
+                    lista.removeItem(key);
+                    break;
+                case 4:
+                    System.out.println("Entre com o novo tamanho da tabela:");
+                    System.out.print("  - ");
+                    key = Integer.parseInt(input.nextLine());
+                    lista.setMaximo(key);
+                    break;
+                case 5:
+                    lista.ordenaListaCrescente();
+                    System.out.println("Tabela Ordenada...");
+                    break;
+                case 6:
+                    lista.ordenaListaDecrescente();
+                    System.out.println("Tabela Ordenada...");
+                    break;
+                case 0:
+                    System.out.println("Obrigado por usar nosso sistema!");
+                    break;
+                default:
+                    System.out.println("Entrada Inválida!");
             }
         }while (op != 0);
     }
 
     public static void main(String[] args) {
-        ArvoreBinaria tree = new ArvoreBinaria(10);
-        tree.addItem(tree.getRaiz(), 15, "ok");
-        tree.addItem(tree.getRaiz(), 25, "ok");
-        tree.addItem(tree.getRaiz(), 11, "ok");
-        tree.addItem(tree.getRaiz(), 13, "ok");
-        tree.addItem(tree.getRaiz(), 19, "ok");
-
-        tree.imprimeArvore(tree.getRaiz());
+        int op;
+        int max;
+        System.out.println("Bem vindo!");
+        System.out.println("Que tipo de estrutura deseja utilizar?\n\t1. Lista Encadeada;\n\t2. Arvore Binária de Busca.");
+        System.out.print("\t - ");
+        op = Integer.parseInt(input.nextLine());
+        System.out.println("Entre com o tamanho da tabela:");
+        System.out.println("(potencias de 10 com expoentes entre 1 e 6)");
+        System.out.print("\t - ");
+        max = Integer.parseInt(input.nextLine());
+        if(op == 1){
+            lista(max);
+        }else if(op == 2){
+            arvore(max);
+        }
     }
 
 }
